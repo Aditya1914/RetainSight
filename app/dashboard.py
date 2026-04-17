@@ -15,6 +15,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+if not (ROOT / "data" / "models" / "churn_model.pkl").exists():
+    from src.data_generation.generate import generate_all
+    from src.ml.models import train_churn_model, train_segmentation, train_ltv_model
+    generate_all(seed=42)
+    train_churn_model()
+    train_segmentation()
+    train_ltv_model()
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
