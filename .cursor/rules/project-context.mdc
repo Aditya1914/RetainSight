@@ -1,0 +1,33 @@
+---
+description: RetainSight project context — architecture, layers, and conventions
+alwaysApply: true
+---
+
+# RetainSight — Project Context
+
+RetainSight is a **Predictive Business Analytics Platform** for customer retention.
+
+## Architecture (6 layers)
+
+1. **Data Foundation** — SQLite DB (`data/retainsight.db`) with 4 tables: customers, subscriptions, transactions, events
+2. **SQL Analytics** — `src/analytics/queries.py` — 10 analytical functions (cohorts, revenue, funnels, LTV)
+3. **ML Models** — `src/ml/models.py` — Churn prediction, customer segmentation, LTV estimation
+4. **Feature Engineering** — `src/ml/feature_engineering.py` — 18+ features built from raw SQL
+5. **Decision Engine** — `src/decision_engine/engine.py` — Recommendations with ROI estimates
+6. **Dashboard** — `app/dashboard.py` — 5-page Streamlit app with Plotly charts
+
+## Key Conventions
+
+- All SQL queries live in `queries.py` as functions returning DataFrames
+- ML models are trained via `setup.py` and saved as `.pkl` in `data/models/`
+- The decision engine consumes ML predictions, never raw data directly
+- Dashboard uses `@st.cache_data` for all data loading functions
+- Synthetic data has intentional patterns (churned users show declining activity)
+
+## Running the Project
+
+```bash
+source .venv/bin/activate
+python setup.py            # generates data + trains models
+streamlit run app/dashboard.py
+```

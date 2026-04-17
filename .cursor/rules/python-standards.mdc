@@ -1,0 +1,16 @@
+---
+description: Python coding standards for RetainSight
+globs: "**/*.py"
+alwaysApply: false
+---
+
+# Python Standards
+
+- Python 3.14+ — use modern syntax (type hints, `match`, `|` union types)
+- Use `pathlib.Path` for all file paths, never `os.path`
+- SQL queries use parameterized placeholders (`?`), never f-strings
+- Every analytics/ML function returns a `pd.DataFrame`
+- Database connections via `src/data_generation/schema.get_connection()` — never construct connections manually
+- Imports: stdlib → third-party → project modules, separated by blank lines
+- No wildcard imports
+- Docstrings on public functions (one-liner or numpy-style for complex ones)

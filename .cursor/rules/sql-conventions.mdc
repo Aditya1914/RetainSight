@@ -1,0 +1,17 @@
+---
+description: SQL query conventions for analytics functions
+globs: "src/analytics/**/*.py"
+alwaysApply: false
+---
+
+# SQL Conventions
+
+- All queries live in `src/analytics/queries.py` as standalone functions
+- Each function runs one SQL query and returns a `pd.DataFrame`
+- Use CTEs (`WITH`) for multi-step logic, not nested subqueries
+- Use window functions (`LAG`, `ROW_NUMBER`, `FIRST_VALUE`) where appropriate
+- Always alias computed columns with readable names
+- Use `COALESCE` for nullable joins, never let NULLs propagate silently
+- Date math uses SQLite's `strftime()`, `julianday()`, and `date()` functions
+- Group-by columns referenced by position (`GROUP BY 1`) only in simple cases
+- Parameterize user inputs with `?` placeholders, never interpolate

@@ -1,0 +1,15 @@
+---
+description: Jupyter notebook conventions for EDA and analysis
+globs: "notebooks/**/*.ipynb"
+alwaysApply: false
+---
+
+# Notebook Patterns
+
+- Notebooks are for exploration and storytelling, not production code
+- First cell: imports + data loading + `sys.path` setup to access `src/`
+- Use Plotly for all visualizations (consistent with the dashboard)
+- Add markdown cells between code cells explaining observations and reasoning
+- End with a "Key Takeaways" summary section
+- Reuse functions from `src/analytics/queries.py` where possible instead of rewriting SQL
+- Color palette matches dashboard: `#4F46E5`, `#7C3AED`, `#EF4444`, `#10B981`

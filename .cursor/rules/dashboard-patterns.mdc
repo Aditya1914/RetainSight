@@ -1,0 +1,16 @@
+---
+description: Streamlit dashboard patterns and conventions
+globs: "app/**/*.py"
+alwaysApply: false
+---
+
+# Dashboard Patterns
+
+- Use `width="stretch"` on charts and dataframes (NOT the deprecated `use_container_width`)
+- All data loading wrapped in `@st.cache_data(ttl=300)` functions
+- Imports from `src/` happen inside cache functions to avoid circular imports at module level
+- Color palette: primary `#4F46E5`, accent `#7C3AED`, success `#10B981`, danger `#EF4444`, warning `#F59E0B`
+- Risk tier colors: High → `#EF4444`, Medium → `#F59E0B`, Low → `#10B981`
+- Use `st.metric()` via the `metric_card()` helper for KPI display
+- Charts use Plotly (`px` for quick plots, `go` for complex ones)
+- Page structure: title → KPI row → charts in columns → detail tables
